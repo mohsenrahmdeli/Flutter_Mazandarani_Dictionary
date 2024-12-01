@@ -42,11 +42,16 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+              ),
               textDirection: TextDirection.rtl,
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
                 hintTextDirection: TextDirection.rtl,
+                hintStyle: const TextStyle(color:Colors.black38),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -68,17 +73,30 @@ class _HomePageState extends State<HomePage> {
                       return ListTile(
                         title: Align(
                             alignment: Alignment.centerRight,
-                            child: Text(word.word)),
+                            child: Text(word.word,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               'تلفظ : ${word.read}',
                               textDirection: TextDirection.rtl,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                             Text(
                               'معنی : ${word.mean}',
                               textDirection: TextDirection.rtl,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
                         ),
