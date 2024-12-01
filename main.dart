@@ -5,7 +5,7 @@ void main() async {
   runApp(
       MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SearchPage(),
+      home: HomePage(),
     ),
   );
 }
