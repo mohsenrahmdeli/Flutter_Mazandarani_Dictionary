@@ -39,9 +39,12 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               textDirection: TextDirection.rtl,
               controller: _searchController,
-              decoration: const InputDecoration(
-                labelText: 'جستجو',
-                border: OutlineInputBorder(),
+              decoration:  InputDecoration(
+                hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
+                hintTextDirection: TextDirection.rtl,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
               ),
               onChanged: _searchWords, // جستجو با هر تغییر در متن
             ),
