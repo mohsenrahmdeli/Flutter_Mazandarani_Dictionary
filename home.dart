@@ -44,79 +44,94 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              textDirection: TextDirection.rtl,
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
-                hintTextDirection: TextDirection.rtl,
-                hintStyle: const TextStyle(color: Colors.black38),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-              onChanged: _searchWords,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 25,
             ),
-          ),
-          Expanded(
-            child: _noResults
-                ? const Center(child: Text('نتیجه‌ای یافت نشد'))
-                : ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    itemCount: _searchResults.length,
-                    itemBuilder: (context, index) {
-                      final word = _searchResults[index];
-                      return ListTile(
-                        title: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            word.word,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textDirection: TextDirection.rtl,
+                controller: _searchController,
+                decoration: InputDecoration(
+                  fillColor: Colors.red,
+                  hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
+                  hintTextDirection: TextDirection.rtl,
+                  hintStyle: const TextStyle(color: Colors.black38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                onChanged: _searchWords,
+              ),
+            ),
+            Expanded(
+              child: _noResults
+                  ?  Center(child: Column(
+                    children: [
+                      Image.asset('assets/images/2.gif',
+                      width: 350,
+                      height: 350,
+                      ),
+                      const Text('نتیجه‌ای یافت نشد',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color:Colors.black,
+                        fontSize: 18,
+                      ),),
+                    ],
+                  ))
+                  : ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(
+                        color: Colors.grey,
+                        thickness: 1,
+                      ),
+                      itemCount: _searchResults.length,
+                      itemBuilder: (context, index) {
+                        final word = _searchResults[index];
+                        return ListTile(
+                          title: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              word.word,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'تلفظ : ${word.read}',
-                              textDirection: TextDirection.rtl,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'تلفظ : ${word.read}',
+                                textDirection: TextDirection.rtl,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'معنی : ${word.mean}',
-                              textDirection: TextDirection.rtl,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                              Text(
+                                'معنی : ${word.mean}',
+                                textDirection: TextDirection.rtl,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-          ),
-        ],
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }
