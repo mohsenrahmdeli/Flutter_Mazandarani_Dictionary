@@ -24,14 +24,19 @@ class _HomePageState extends State<HomePage> {
     final results = await DatabaseHelper().searchWords(query);
     setState(() {
       _searchResults = results;
-      _noResults = results.isEmpty; // اگر نتایجی وجود ندارد، پرچم تنظیم می‌شود
+      _noResults = results.isEmpty; 
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dictionary')),
+      appBar: AppBar(
+        title: const Text(
+          'مترجم مازندرانی',
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Padding(
@@ -39,14 +44,14 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               textDirection: TextDirection.rtl,
               controller: _searchController,
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
                 hintTextDirection: TextDirection.rtl,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
-              onChanged: _searchWords, // جستجو با هر تغییر در متن
+              onChanged: _searchWords,
             ),
           ),
           Expanded(
@@ -54,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 ? const Center(child: Text('نتیجه‌ای یافت نشد'))
                 : ListView.separated(
                     separatorBuilder: (context, index) => const Divider(
-                      color: Colors.grey, // خط جداکننده بین آیتم‌ها
+                      color: Colors.grey,
                       thickness: 1,
                     ),
                     itemCount: _searchResults.length,
