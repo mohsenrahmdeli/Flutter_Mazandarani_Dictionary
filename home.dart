@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'db_Helper.dart';
 import 'models.dart';
 
-class SearchPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   List<WordModel> _searchResults = [];
   bool _noResults = false;
