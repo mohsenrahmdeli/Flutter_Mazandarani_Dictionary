@@ -24,34 +24,44 @@ class _HomePageState extends State<HomePage> {
     final results = await DatabaseHelper().searchWords(query);
     setState(() {
       _searchResults = results;
-      _noResults = results.isEmpty; 
+      _noResults = results.isEmpty;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 22, 6, 241),
         title: const Text(
           'مترجم مازندرانی',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 25,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                color: Colors.black,
               ),
               textDirection: TextDirection.rtl,
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
                 hintTextDirection: TextDirection.rtl,
-                hintStyle: const TextStyle(color:Colors.black38),
+                hintStyle: const TextStyle(color: Colors.black38),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -72,13 +82,15 @@ class _HomePageState extends State<HomePage> {
                       final word = _searchResults[index];
                       return ListTile(
                         title: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(word.word,
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            word.word,
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
