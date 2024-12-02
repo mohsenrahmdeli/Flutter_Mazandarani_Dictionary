@@ -31,9 +31,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFF7F3E),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 22, 6, 241),
+        backgroundColor: const Color(0xFFDEAA79),
         title: const Text(
           'مترجم مازندرانی',
           style: TextStyle(
@@ -74,9 +74,13 @@ class _HomePageState extends State<HomePage> {
                     focusColor: Colors.red,
                     hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
                     hintTextDirection: TextDirection.rtl,
-                    hintStyle: const TextStyle(color: Colors.black38),
+                    hintStyle: const TextStyle(
+                      color: Colors.black38,
+                    ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(
+                        30.0,
+                      ),
                     ),
                   ),
                   onChanged: _searchWords,
@@ -105,7 +109,9 @@ class _HomePageState extends State<HomePage> {
                       )
                     : ListView.separated(
                         separatorBuilder: (context, index) => const Divider(
-                          color: Colors.grey,
+                          indent: 5,
+                          endIndent: 5,
+                          color: Colors.white,
                           thickness: 1,
                         ),
                         itemCount: _searchResults.length,
