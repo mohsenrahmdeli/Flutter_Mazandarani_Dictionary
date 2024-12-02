@@ -112,9 +112,29 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 15),
+                const SizedBox(
+                  height: 25,
+                ),
                 _buildLogo(),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  'شِه کلِمِه‌ رِه پیدا هَکِردِنهِ وِسه هَمینجِه بَنِویس',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontFamily: 'Yekan',
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 _buildSearchBar(),
+                SizedBox(
+                  height: 10,
+                ),
                 Expanded(child: _buildContent()),
               ],
             ),
@@ -126,10 +146,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildContent() {
     if (_isInitialState) {
-      return Center(
-        child: Text(
-          'لطفاً کلمه‌ای برای جستجو وارد کنید',
-          style: _subtitleTextStyle,
+      return Text(
+        "هَمینتا هَمینتا کادرِ بالایی دِلِه هر چی خانّی تونّی بَنِویسی",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontFamily: 'Yekan',
+          fontSize: 14,
         ),
       );
     }
