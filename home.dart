@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
             fontSize: 25,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Titr',
           ),
         ),
         centerTitle: true,
@@ -52,7 +53,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const SizedBox(
-                height: 25,
+                height: 15,
+              ),
+              Image.asset('assets/images/2.png',
+              width: 200,
+              height: 200,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
