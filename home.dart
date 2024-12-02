@@ -34,6 +34,8 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: const Color(0xFFFFEAC5),
         appBar: AppBar(
+          shadowColor: Colors.redAccent,
+          surfaceTintColor: Colors.redAccent,
           backgroundColor: const Color(0xFFFFDBB5),
           title: const Text(
             'مترجم مازندرانی',
