@@ -30,130 +30,132 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFF7F3E),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFDEAA79),
-        title: const Text(
-          'مترجم مازندرانی',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Titr',
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFFFEAC5),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFFFDBB5),
+          title: const Text(
+            'مترجم مازندرانی',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Titr',
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        reverse: true,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Image.asset(
-                'assets/images/2.png',
-                width: 150,
-                height: 150,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  textDirection: TextDirection.rtl,
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    focusColor: Colors.red,
-                    hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
-                    hintTextDirection: TextDirection.rtl,
-                    hintStyle: const TextStyle(
-                      color: Colors.black38,
+        body: SingleChildScrollView(
+          reverse: true,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                Image.asset(
+                  'assets/images/2.png',
+                  width: 150,
+                  height: 150,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        30.0,
+                    textDirection: TextDirection.rtl,
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      focusColor: Colors.red,
+                      hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
+                      hintTextDirection: TextDirection.rtl,
+                      hintStyle: const TextStyle(
+                        color: Colors.black38,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          30.0,
+                        ),
                       ),
                     ),
+                    onChanged: _searchWords,
                   ),
-                  onChanged: _searchWords,
                 ),
-              ),
-              Expanded(
-                child: _noResults
-                    ? Center(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/2.gif',
-                              width: 250,
-                              height: 250,
-                            ),
-                            const Text(
-                              'نتیجه‌ای یافت نشد',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18,
+                Expanded(
+                  child: _noResults
+                      ? Center(
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/images/2.gif',
+                                width: 250,
+                                height: 250,
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.separated(
-                        separatorBuilder: (context, index) => const Divider(
-                          indent: 5,
-                          endIndent: 5,
-                          color: Colors.white,
-                          thickness: 1,
-                        ),
-                        itemCount: _searchResults.length,
-                        itemBuilder: (context, index) {
-                          final word = _searchResults[index];
-                          return ListTile(
-                            title: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'کلمه : ${word.word}',
-                                style: const TextStyle(
+                              const Text(
+                                'نتیجه‌ای یافت نشد',
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
+                                  fontSize: 18,
                                 ),
                               ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'تلفظ : ${word.read}',
-                                  textDirection: TextDirection.rtl,
+                            ],
+                          ),
+                        )
+                      : ListView.separated(
+                          separatorBuilder: (context, index) => const Divider(
+                            indent: 5,
+                            endIndent: 5,
+                            color: Colors.white,
+                            thickness: 1,
+                          ),
+                          itemCount: _searchResults.length,
+                          itemBuilder: (context, index) {
+                            final word = _searchResults[index];
+                            return ListTile(
+                              title: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  'کلمه : ${word.word}',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
                                 ),
-                                Text(
-                                  'معنی : ${word.mean}',
-                                  textDirection: TextDirection.rtl,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'تلفظ : ${word.read}',
+                                    textDirection: TextDirection.rtl,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-              ),
-            ],
+                                  Text(
+                                    'معنی : ${word.mean}',
+                                    textDirection: TextDirection.rtl,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
