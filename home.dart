@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'db_Helper.dart';
 import 'models.dart';
 
@@ -35,9 +36,11 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color(0xFFFFEAC5),
         appBar: AppBar(
           leading: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              SystemNavigator.pop();
+            },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+              padding: const EdgeInsets.only(top:15,bottom: 15,),
               child: Image.asset(
                 'assets/images/exit.png',
                 
