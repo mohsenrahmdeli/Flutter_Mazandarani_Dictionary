@@ -27,21 +27,71 @@ class _HomePageState extends State<HomePage> {
     fontSize: 18,
   );
 
-  void _searchWords(String query) async {
-    if (query.isEmpty) {
-      setState(() {
-        _searchResults = [];
-        _noResults = false;
-      });
-      return;
-    }
+void _showNoResultsDialog() {
+  showDialog(
+    barrierColor: Colors.redAccent,
+    barrierDismissible: false,
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/2.gif',
+            width: 150,
+            height: 150,
+          ),
+          const SizedBox(height: 10),
+            Text(
+            'نتیجه‌ای یافت نشد !!!',
+            textDirection: TextDirection.rtl,
+            style: _subtitleTextStyle,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            _searchController.clear(); 
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'تلاش مجدد',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
-    final results = await DatabaseHelper().searchWords(query);
+void _searchWords(String query) async {
+  if (query.isEmpty) {
     setState(() {
-      _searchResults = results;
-      _noResults = results.isEmpty;
+      _searchResults = [];
+      _noResults = false;
     });
+    return;
   }
+
+  final results = await DatabaseHelper().searchWords(query);
+  setState(() {
+    _searchResults = results;
+    _noResults = results.isEmpty;
+  });
+
+  if (_noResults) {
+    _showNoResultsDialog();
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -123,43 +173,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildResults() {
-    if (_noResults) {
-      return 
-      Center(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/2.gif',
-              width: 250,
-              height: 250,
-            ),
-            const Text(
-              'نتیجه‌ای یافت نشد',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+Widget _buildResults() {
+  return _noResults
+      ? const SizedBox() // وقتی نتیجه‌ای نیست، چیزی نمایش نمی‌دهد
+      : ListView.separated(
+          separatorBuilder: (_, __) => const Divider(
+            color: Colors.white,
+            thickness: 1,
+          ),
+          itemCount: _searchResults.length,
+          itemBuilder: (context, index) {
+            return _buildWordTile(_searchResults[index]);
+          },
+        );
+}
 
-    return ListView.separated(
-      separatorBuilder: (_, __) => const Divider(
-        color: Colors.black45,
-        thickness: 1,
-        indent: 5,
-        endIndent: 5,
-      ),
-      itemCount: _searchResults.length,
-      itemBuilder: (context, index) {
-        return _buildWordTile(_searchResults[index]);
-      },
-    );
-  }
 
   Widget _buildWordTile(WordModel word) {
     return ListTile(
