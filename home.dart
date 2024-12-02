@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                   textDirection: TextDirection.rtl,
                   controller: _searchController,
                   decoration: InputDecoration(
-                    fillColor: Colors.red,
+                    focusColor: Colors.red,
                     hintText: 'لطفا حرف یا کلمه مورد نظر را بنویسید',
                     hintTextDirection: TextDirection.rtl,
                     hintStyle: const TextStyle(color: Colors.black38),
@@ -86,22 +86,23 @@ class _HomePageState extends State<HomePage> {
                 child: _noResults
                     ? Center(
                         child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/2.gif',
-                            width: 350,
-                            height: 350,
-                          ),
-                          const Text(
-                            'نتیجه‌ای یافت نشد',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontSize: 18,
+                          children: [
+                            Image.asset(
+                              'assets/images/2.gif',
+                              width: 250,
+                              height: 250,
                             ),
-                          ),
-                        ],
-                      ))
+                            const Text(
+                              'نتیجه‌ای یافت نشد',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     : ListView.separated(
                         separatorBuilder: (context, index) => const Divider(
                           color: Colors.grey,
