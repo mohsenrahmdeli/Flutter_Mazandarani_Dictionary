@@ -40,10 +40,12 @@ class _HomePageState extends State<HomePage> {
               SystemNavigator.pop();
             },
             child: Padding(
-              padding: const EdgeInsets.only(top:15,bottom: 15,),
+              padding: const EdgeInsets.only(
+                top: 15,
+                bottom: 15,
+              ),
               child: Image.asset(
                 'assets/images/exit.png',
-                
               ),
             ),
           ),
@@ -51,12 +53,12 @@ class _HomePageState extends State<HomePage> {
           surfaceTintColor: Colors.redAccent,
           backgroundColor: const Color(0xFFFFDBB5),
           title: const Text(
-            'مترجم مازندرانی',
+            'مترجم مازِرونی',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 25,
+              fontSize: 30,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Titr',
+              fontFamily: 'Maryam',
             ),
           ),
           centerTitle: true,
@@ -140,19 +142,44 @@ class _HomePageState extends State<HomePage> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
+                                    fontFamily: 'Yekan',
+                                    fontSize: 12,
                                   ),
                                 ),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text(
-                                    'تلفظ : ${word.read}',
-                                    textDirection: TextDirection.rtl,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
+                                  SizedBox(
+                                    height: 3.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        word.read,
+                                        textDirection: TextDirection.rtl,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontFamily: 'Yekan',
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        'تلفظ : ',
+                                        textDirection: TextDirection.rtl,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontFamily: 'Yekan',
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 3.0,
                                   ),
                                   Text(
                                     'معنی : ${word.mean}',
@@ -160,6 +187,8 @@ class _HomePageState extends State<HomePage> {
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
+                                      fontFamily: 'Yekan',
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ],
