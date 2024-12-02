@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   List<WordModel> _searchResults = [];
   bool _noResults = false;
+  bool _isInitialState = true;
 
   final TextStyle _titleTextStyle = const TextStyle(
     fontWeight: FontWeight.bold,
@@ -27,72 +28,76 @@ class _HomePageState extends State<HomePage> {
     fontSize: 18,
   );
 
-void _showNoResultsDialog() {
-  showDialog(
-    barrierColor: Colors.redAccent.shade700,
-    barrierDismissible: false,
-    context: context,
-    builder: (context) => AlertDialog(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/2.gif',
-            width: 150,
-            height: 150,
-          ),
-          const SizedBox(height: 10),
+  void _showNoResultsDialog() {
+    showDialog(
+      barrierColor: Colors.redAccent.shade700,
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/images/2.gif',
+              width: 150,
+              height: 150,
+            ),
+            const SizedBox(height: 10),
             Text(
-            'متاسفانه نتیجه‌ای یافت نشد !!!',
-            textDirection: TextDirection.rtl,
-            style: _subtitleTextStyle,
-            textAlign: TextAlign.center,
+              'متاسفانه نتیجه‌ای یافت نشد !!!',
+              textDirection: TextDirection.rtl,
+              style: _subtitleTextStyle,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              _searchController.clear();
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'تلاش مجدد',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+                fontFamily: 'Yekan',
+              ),
+            ),
           ),
         ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            _searchController.clear(); 
-            Navigator.of(context).pop();
-          },
-          child: const Text(
-            'تلاش مجدد',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-              fontFamily: 'Yekan',
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
+    );
+  }
 
-void _searchWords(String query) async {
-  if (query.isEmpty) {
+  void _searchWords(String query) async {
     setState(() {
-      _searchResults = [];
-      _noResults = false;
+      _isInitialState = query.isEmpty;
     });
-    return;
-  }
 
-  final results = await DatabaseHelper().searchWords(query);
-  setState(() {
-    _searchResults = results;
-    _noResults = results.isEmpty;
-  });
+    if (query.isEmpty) {
+      setState(() {
+        _searchResults = [];
+        _noResults = false;
+      });
+      return;
+    }
 
-  if (_noResults) {
-    _showNoResultsDialog();
+    final results = await DatabaseHelper().searchWords(query);
+    setState(() {
+      _searchResults = results;
+      _noResults = results.isEmpty;
+    });
+
+    if (_noResults) {
+      _showNoResultsDialog();
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +115,7 @@ void _searchWords(String query) async {
                 const SizedBox(height: 15),
                 _buildLogo(),
                 _buildSearchBar(),
-                Expanded(child: _buildResults()),
+                Expanded(child: _buildContent()),
               ],
             ),
           ),
@@ -119,13 +124,27 @@ void _searchWords(String query) async {
     );
   }
 
+  Widget _buildContent() {
+    if (_isInitialState) {
+      return Center(
+        child: Text(
+          'لطفاً کلمه‌ای برای جستجو وارد کنید',
+          style: _subtitleTextStyle,
+        ),
+      );
+    }
+    return _buildResults();
+  }
+
   AppBar _buildAppBar() {
     return AppBar(
       leading: GestureDetector(
         onTap: () => SystemNavigator.pop(),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Image.asset('assets/images/exit.png',),
+          child: Image.asset(
+            'assets/images/exit.png',
+          ),
         ),
       ),
       shadowColor: Colors.redAccent,
@@ -174,21 +193,21 @@ void _searchWords(String query) async {
     );
   }
 
-Widget _buildResults() {
-  return _noResults
-      ? const SizedBox() // وقتی نتیجه‌ای نیست، چیزی نمایش نمی‌دهد
-      : ListView.separated(
-          separatorBuilder: (_, __) => const Divider(
-            color: Colors.white,
-            thickness: 1,
-          ),
-          itemCount: _searchResults.length,
-          itemBuilder: (context, index) {
-            return _buildWordTile(_searchResults[index]);
-          },
-        );
-}
-
+  Widget _buildResults() {
+    if (_noResults) {
+      return const SizedBox();
+    }
+    return ListView.separated(
+      separatorBuilder: (_, __) => const Divider(
+        color: Colors.white,
+        thickness: 1,
+      ),
+      itemCount: _searchResults.length,
+      itemBuilder: (context, index) {
+        return _buildWordTile(_searchResults[index]);
+      },
+    );
+  }
 
   Widget _buildWordTile(WordModel word) {
     return ListTile(
