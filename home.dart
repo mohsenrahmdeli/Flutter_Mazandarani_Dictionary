@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
 void _showNoResultsDialog() {
   showDialog(
-    barrierColor: Colors.redAccent,
+    barrierColor: Colors.redAccent.shade700,
     barrierDismissible: false,
     context: context,
     builder: (context) => AlertDialog(
@@ -47,7 +47,7 @@ void _showNoResultsDialog() {
           ),
           const SizedBox(height: 10),
             Text(
-            'نتیجه‌ای یافت نشد !!!',
+            'متاسفانه نتیجه‌ای یافت نشد !!!',
             textDirection: TextDirection.rtl,
             style: _subtitleTextStyle,
             textAlign: TextAlign.center,
@@ -65,6 +65,7 @@ void _showNoResultsDialog() {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.red,
+              fontFamily: 'Yekan',
             ),
           ),
         ),
