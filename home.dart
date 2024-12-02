@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        reverse: true,
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height,
@@ -57,8 +58,8 @@ class _HomePageState extends State<HomePage> {
               ),
               Image.asset(
                 'assets/images/2.png',
-                width: 200,
-                height: 200,
+                width: 150,
+                height: 150,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
