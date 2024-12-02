@@ -48,16 +48,17 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-      maxHeight: MediaQuery.of(context).size.height,
-    ),
+            maxHeight: MediaQuery.of(context).size.height,
+          ),
           child: Column(
             children: [
               const SizedBox(
                 height: 15,
               ),
-              Image.asset('assets/images/2.png',
-              width: 200,
-              height: 200,
+              Image.asset(
+                'assets/images/2.png',
+                width: 200,
+                height: 200,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -82,19 +83,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: _noResults
-                    ?  Center(child: Column(
-                      children: [
-                        Image.asset('assets/images/2.gif',
-                        width: 350,
-                        height: 350,
-                        ),
-                        const Text('نتیجه‌ای یافت نشد',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color:Colors.black,
-                          fontSize: 18,
-                        ),),
-                      ],
-                    ))
+                    ? Center(
+                        child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/2.gif',
+                            width: 350,
+                            height: 350,
+                          ),
+                          const Text(
+                            'نتیجه‌ای یافت نشد',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ))
                     : ListView.separated(
                         separatorBuilder: (context, index) => const Divider(
                           color: Colors.grey,
@@ -107,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                             title: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                word.word,
+                                'کلمه : ${word.word}',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
